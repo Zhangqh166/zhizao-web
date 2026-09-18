@@ -5,6 +5,7 @@
   --line: rgba(28, 25, 22, 0.12);
   --card: #fffdf9;
   --accent: #8a6a4a;
+  --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -27,7 +28,9 @@ nav a:hover { color: var(--ink); }
   display: inline-block; background: var(--ink); color: #f7f2eb;
   padding: 12px 22px; border-radius: 999px; font-size: 14px; letter-spacing: 0.04em;
   border: none; cursor: pointer;
+  transition: transform 0.45s var(--ease-apple), opacity 0.45s var(--ease-apple), background 0.3s ease;
 }
+.btn:hover { transform: scale(1.02); }
 .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 .hero {
   display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px;
@@ -46,8 +49,8 @@ h1 {
 .hero-visual {
   border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 5;
   background:
-    linear-gradient(160deg, rgba(28,25,22,0.18), rgba(28,25,22,0.45)),
-    linear-gradient(145deg, #d8c4ad, #9a7d62);
+    linear-gradient(160deg, rgba(28,25,22,0.18), rgba(28,25,22,0.42)),
+    url("https://images.unsplash.com/photo-1594035910387-fea47794261f?w=1200&q=80&auto=format&fit=crop") center / cover no-repeat;
   box-shadow: 0 30px 60px rgba(28, 25, 22, 0.12);
   position: relative;
 }
@@ -55,6 +58,7 @@ h1 {
   position: absolute; left: 20px; right: 20px; bottom: 20px;
   background: rgba(255,253,249,0.92); border-radius: 14px;
   padding: 14px 16px; font-size: 13px; color: var(--muted);
+  backdrop-filter: blur(10px);
 }
 .hero-visual .cap strong { display: block; color: var(--ink); font-size: 14px; margin-bottom: 2px; }
 section { padding: 28px 0 72px; }
@@ -67,7 +71,9 @@ h2 {
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: 18px;
   padding: 22px 20px 24px; min-height: 180px;
+  transition: transform 0.6s var(--ease-apple), box-shadow 0.6s var(--ease-apple);
 }
+.card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(28,25,22,0.06); }
 .card.detail { min-height: 0; }
 .num { font-size: 12px; color: var(--accent); letter-spacing: 0.16em; margin-bottom: 28px; }
 .card h3 { font-size: 20px; font-weight: 560; margin-bottom: 10px; }
@@ -85,7 +91,16 @@ h2 {
   border: 1px solid var(--line);
 }
 .case.tall { grid-row: span 2; min-height: 460px; }
-.case .bg { position: absolute; inset: 0; background: var(--case-bg); }
+.case .bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(28,25,22,0.05) 20%, rgba(28,25,22,0.55) 100%),
+    var(--case-img) center / cover no-repeat,
+    var(--case-bg);
+  transform: scale(1.02);
+  transition: transform 1.2s var(--ease-apple);
+}
+.case:hover .bg { transform: scale(1.06); }
 .case .meta { position: absolute; left: 18px; right: 18px; bottom: 18px; color: #f7f2eb; }
 .case .tag { font-size: 11px; letter-spacing: 0.14em; opacity: 0.8; margin-bottom: 8px; }
 .case h3 { font-size: 22px; font-weight: 560; margin-bottom: 6px; }
@@ -139,6 +154,36 @@ footer {
   padding: 36px 0 48px; display: flex; justify-content: space-between; gap: 16px;
   color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); margin-top: 20px;
 }
+
+/* Apple-like scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 1.05s var(--ease-apple),
+    transform 1.05s var(--ease-apple);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.reveal.d1 { transition-delay: 0.06s; }
+.reveal.d2 { transition-delay: 0.12s; }
+.reveal.d3 { transition-delay: 0.18s; }
+.reveal.d4 { transition-delay: 0.24s; }
+.hero-copy.reveal { transform: translateY(18px); }
+.hero-visual.reveal { transform: translateY(24px) scale(0.985); }
+.hero-visual.reveal.in { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.in, .card, .btn, .case .bg {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 @media (max-width: 900px) {
   nav { display: none; }
   .hero, .services, .process, .audience, .contact-grid { grid-template-columns: 1fr; }
