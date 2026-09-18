@@ -23,29 +23,41 @@
       <div class="section-title">CONTACT</div>
       <h1>先聊清楚，再动手。</h1>
       <div class="prose">
-        <p>新店、老店改造、培训，都可以先丢一句话过来。邮箱：<strong>hello@zhizao.cn</strong>（可改）</p>
+        <p>新店、老店改造、培训，都可以先丢一句话过来。城市、面积、品类写一下就行。</p>
       </div>
-      <form class="form" action="mailto:hello@zhizao.cn" method="post" enctype="text/plain">
-        <label>怎么称呼
-          <input name="name" placeholder="您的称呼" required />
-        </label>
-        <label>联系方式
-          <input name="contact" placeholder="微信 / 手机 / 邮箱" required />
-        </label>
-        <label>想做什么
-          <select name="type">
-            <option>新店落地</option>
-            <option>老店改造</option>
-            <option>培训 / 陪跑</option>
-            <option>先诊断看看</option>
-          </select>
-        </label>
-        <label>简单说一下
-          <textarea name="message" placeholder="城市、面积、品类、大致预算…随便写"></textarea>
-        </label>
-        <button class="btn" type="submit">发送需求</button>
-        <p class="note">若邮件客户端打不开，直接加微信或发邮件到 hello@zhizao.cn 也行。</p>
-      </form>
+
+      <div class="contact-grid">
+        <div>
+          <form class="form" action="mailto:hello@zhizao.cn" method="post" enctype="text/plain">
+            <label>怎么称呼
+              <input name="name" placeholder="您的称呼" required />
+            </label>
+            <label>联系方式
+              <input name="contact" placeholder="微信 / 手机 / 邮箱" required />
+            </label>
+            <label>想做什么
+              <select name="type">
+                <option>新店落地</option>
+                <option>老店改造</option>
+                <option>培训 / 陪跑</option>
+                <option>先诊断看看</option>
+              </select>
+            </label>
+            <label>简单说一下
+              <textarea name="message" placeholder="城市、面积、品类、大致预算…随便写"></textarea>
+            </label>
+            <button class="btn" type="submit">发送需求</button>
+            <p class="note">若邮件客户端打不开，直接发邮件到 hello@zhizao.cn，或把微信号发我们替换到本页。</p>
+          </form>
+        </div>
+        <aside class="contact-card">
+          <h3>联系方式</h3>
+          <p>邮箱：hello@zhizao.cn（占位，可换）</p>
+          <p>微信：待补充</p>
+          <p style="margin-top:14px;">服务城市：厦门及周边优先，外地项目可谈。</p>
+          <p>工作时间：工作日 10:00–19:00</p>
+        </aside>
+      </div>
     </section>
 
     <footer>
